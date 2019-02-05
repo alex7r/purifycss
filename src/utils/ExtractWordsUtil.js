@@ -8,7 +8,15 @@ export const getAllWordsInContent = content => {
         html: true,
         body: true
     }
-    const words = content.split(/[^A-z\-0-9\_]/g)
+    var words = content.split(/[^a-zA-Z0-9_-]/g);
+    var contentWithoutSpaces =  content.replace(/\s/g, "");
+    if((contentWithoutSpaces.includes('.join')) || (contentWithoutSpaces.includes('"+"')) ||(contentWithoutSpaces.includes("'+'")) ){
+        words =[];
+        var arrayOfLines = content.match(/[^\r\n]+/g);
+        for(var i = 0; i<arrayOfLines.length;i++){
+            words.push(eval(arrayOfLines[i]));
+        }
+    }
     for (let word of words) {
         used[word] = true
     }
@@ -36,7 +44,7 @@ export const getAllWordsInSelector = selector => {
             skipNextWord = true
             continue
         }
-        if (/[A-z\-0-9\_]/.test(letter)) {
+        if (/[a-zA-Z0-9\_\-]/.test(letter)) {
             word += letter
         } else {
             addWord(words, word)

@@ -1,3 +1,3 @@
-var x = 'added-' + 'together';
+'added-' + 'together';
 
-var y = ['array', 'joined'].join('-');
+['array', 'joined'].join('-');
